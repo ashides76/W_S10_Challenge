@@ -1,7 +1,8 @@
 import React from 'react'
+import { useGetPizzaOrdersQuery } from '../state/pizzasApi'
 
 export default function OrderList() {
-  const orders = []
+  const {data: orders} = useGetPizzaOrdersQuery()
   return (
     <div id="orderList">
       <h2>Pizza Orders</h2>

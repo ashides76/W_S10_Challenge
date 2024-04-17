@@ -5,7 +5,7 @@ import { pizzasApi } from './pizzasApi'
 //   return state
 // }
 
-export const store = () => configureStore({
+export const store = configureStore({
   reducer: {
     // example: exampleReducer,
     [pizzasApi.reducerPath]: pizzasApi.reducer,

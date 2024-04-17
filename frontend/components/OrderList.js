@@ -3,12 +3,13 @@ import { useGetPizzaOrdersQuery } from '../state/pizzasApi'
 
 export default function OrderList() {
   const {data: orders} = useGetPizzaOrdersQuery()
+  console.log(orders);
   return (
     <div id="orderList">
       <h2>Pizza Orders</h2>
       <ol>
         {
-          orders.map(() => {
+          orders?.map(() => {
             return (
               <li key={1}>
                 <div>

@@ -5,15 +5,25 @@ import { filterSize } from '../state/pizzasSlice';
 
 export default function OrderList() {
   const {data: orders} = useGetPizzaOrdersQuery()
-  const pizzaSize = useSelector(st => st.pizzasSlice.pizzaSize)
-  console.log('sizeSlice', pizzaSize);
+  console.log(orders);
+  const selectedSize = useSelector(st => st.pizzasSlice.pizzaSize)
+  console.log('sizeSlice', selectedSize);
   const dispatch = useDispatch()
+
+  const filterBySize = orders?.filter(order => {
+    if (selectedSize === 'All') {
+      return true
+    } else {
+        return order.size === selectedSize
+    }
+  })
+
   return (
     <div id="orderList">
       <h2>Pizza Orders</h2>
       <ol>
         {
-          orders?.map((order) => {
+          filterBySize?.map((order) => {
             return (
               <li key={order.id}>
                 <div>
@@ -28,7 +38,7 @@ export default function OrderList() {
         Filter by size:
         {
           ['All', 'S', 'M', 'L'].map(size => {
-            const className = `button-filter${size === pizzaSize ? ' active' : ''}`
+            const className = `button-filter${size === selectedSize ? ' active' : ''}`
             return <button
               data-testid={`filterBtn${size}`}
               onClick={() => dispatch(filterSize(size))}

@@ -3,12 +3,11 @@ import { createSlice } from '@reduxjs/toolkit'
 export const pizzasSlice = createSlice({
     name: 'pizzasSlice',
     initialState: {
-        pizzaSize: '',
+        pizzaSize: 'All',
     },
     reducers: {
         filterSize: (state, action) => {
-            const size = action.payload
-            state.pizzaSize = size
+            state.pizzaSize = action.payload
         } 
     }
 })

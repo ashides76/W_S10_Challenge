@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { pizzasApi } from './pizzasApi'
 import pizzasSlice from './pizzasSlice'
 
-export const store = configureStore({
+export const resetStore = () => configureStore({
   reducer: {
     pizzasSlice: pizzasSlice,
     [pizzasApi.reducerPath]: pizzasApi.reducer,
@@ -11,3 +11,4 @@ export const store = configureStore({
     pizzasApi.middleware,
   ),
 })
+export const store = resetStore()

@@ -10,10 +10,17 @@ export const pizzasApi = createApi({
             query: () => 'history',
             providesTags: ['Pizzas']
         }),
-       
+        postNewPizzaOrder: build.mutation({
+            query: orderPizza => ({
+                url: 'order',
+                method: 'POST',
+                body: orderPizza,
+            }),
+            invalidatesTags:['Pizzas']
+        })
     })
 })
 
 export const {
-    useGetPizzaOrdersQuery,
+    useGetPizzaOrdersQuery, usePostNewPizzaOrderMutation,
 } = pizzasApi

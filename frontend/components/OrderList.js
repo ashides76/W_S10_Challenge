@@ -4,7 +4,7 @@ import { useGetPizzaOrdersQuery } from '../state/pizzasApi'
 import { filterSize } from '../state/pizzasSlice';
 
 export default function OrderList() {
-  const {data: orders} = useGetPizzaOrdersQuery()
+  const {data: orders, isLoading: orderLoading, isFetching: orderRefreshing } = useGetPizzaOrdersQuery()
   console.log(orders);
   const selectedSize = useSelector(st => st.pizzasSlice.pizzaSize)
   console.log('sizeSlice', selectedSize);
@@ -20,14 +20,15 @@ export default function OrderList() {
 
   return (
     <div id="orderList">
-      <h2>Pizza Orders</h2>
+      <h2>Pizza {(orderRefreshing || orderRefreshing) && 'Being updated...'}</h2>
       <ol>
         {
+          orderLoading ? 'Order loading...' :
           filterBySize?.map((order) => {
             return (
               <li key={order.id}>
                 <div>
-                  {`${order.customer} ordered a size ${order.size} with ${order.toppings.length} toppings`}
+                  {`${order.customer} ordered a size ${order.size} with ${order?.toppings?.length} toppings`}
                 </div>
               </li>
             )
